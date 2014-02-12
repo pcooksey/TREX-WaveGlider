@@ -12,5 +12,6 @@
 *.la
 *.a
 
-#Inore all files in build directory
-build/**/*
+#Ignore all files in build directory
+build/
+
