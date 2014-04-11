@@ -1,0 +1,36 @@
+Command Structure (Rudder right) :
+Header: [1 byte] 0x0A
+WGMS ID: [4 bytes] 0x0
+Data Size: [2 bytes] 0x10
+Structure ID: [1 byte] 0x10
+Command Value: [2 bytes] 0x0004
+Command Message (reserved): [5 bytes] 0x0
+Latitude: [4 bytes] 0x0
+Longitude: [4 bytes] 0x0
+CRC: [2 bytes] 0xD230
+	
+Header	
+00001010
+ID
+00000000 00000000 00000000 00000000
+Data Size
+00000000 00010000
+Structure ID
+00010000
+Command Value
+00000000 00000100
+Message
+00000000 00000000 00000000 00000000 00000000
+Latitude
+00000000 00000000 00000000 00000000
+Longitude
+00000000 00000000 00000000 00000000
+CRC
+11010010 00110000
+
+Expected Response:(Type no payload for rudder right command))
+Type: [1 byte] 0x13
+Command ID: [4 bytes] ?
+Data Size: [2 bytes] 0
+Level 1 Message: [determined by data size] No Data
+CRC [2 bytes] ?

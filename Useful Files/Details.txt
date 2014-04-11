@@ -1,0 +1,24 @@
+arm Cortex-A8
+
+dmesg | grep tty
+
+"stty" command information
+stty -F /dev/ttyO2 -a
+Serial Port is Speed 38400 baud; line = 0;
+The port is ttyO2:
+omap_uart.1: ttyO2 at MMIO 0x49020000 (irq = 74) is a OMAP UART2
+
+Start up code for Ubuntu:
+putty -serial /dev/ttyO2 -sercfg 38400
+
+IP address for BeagleBoard:
+	arp -a
+	Search data for dynamically connected ip address.
+	
+Page 145
+Level 2 messages sent to Default Host 0x02
+
+Page 155 for send command
+
+Page 89 for rudder command 
+8.2.4 for ACK 
