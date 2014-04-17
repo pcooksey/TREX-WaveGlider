@@ -12,17 +12,18 @@
 using namespace std;
 using namespace boost::asio;
 
+enum Commands { LightOn = 0x0220, LightOff = 0x0120,
+                RightRudder = 0x0400, LeftRudder = 0x0500, CenterRudder = 0x0600,
+                FixedHeading = 0x0800, HoldStation =0x0200};
+
 void enumerateMessage(TimeoutSerial &serial, PayloadPacket &payload);
 void requestStatus(TimeoutSerial &serial, PayloadPacket &payload);
 void pollingLoop(TimeoutSerial &serial);
-void sendCommand(TimeoutSerial &serial, PayloadPacket &payload);
+void sendCommand(TimeoutSerial &serial, PayloadPacket &payload, Commands command);
 void newWayPoint(TimeoutSerial &serial, PayloadPacket &payload);
 void readWayPoint(TimeoutSerial &serial, PayloadPacket &payload);
 
-bool queued = true;
-
-enum Commands { LightOn = 0x0220, LightOff = 0x0120,
-                RightRudder = 0x0400, LeftRudder = 0x0500, CenterRudder = 0x0600};
+int queued = 3;
 
 int main()
 {
@@ -33,7 +34,6 @@ int main()
         #else
             TimeoutSerial serial("/dev/ttyO2",115200);
         #endif
-
         // Starting polling for messages from the C&C
         pollingLoop(serial);
 
@@ -66,10 +66,27 @@ void pollingLoop(TimeoutSerial &serial)
                 break;
             case 0x4000:
                 cout<<"----------- Command Packet --------------"<<endl;
-                //sendCommand(serial,payload);
+
+                //Rudder Test
+                switch(queued)
+                {
+                    case 1:
+                        sendCommand(serial,payload, RightRudder);
+                        break;
+                    case 2:
+                        sendCommand(serial,payload, LeftRudder);
+                        break;
+                    case 3:
+                        sendCommand(serial,payload, CenterRudder);
+                        break;
+                    default:
+                        sendCommand(serial,payload, CenterRudder);
+                }
+
                 //newWayPoint(serial, payload);
-                readWayPoint(serial,payload);
-                queued = false;
+                //readWayPoint(serial,payload);
+                //sendCommand(serial,payload,HoldStation);
+                queued--;
                 break;
             case 0x1000:
                 // Start enumeration process with the C&C
@@ -128,13 +145,13 @@ void requestStatus(TimeoutSerial &serial, PayloadPacket &payload)
     bitset<4*Command::BYTE> numberResponding3(0x00000001);
     string temp = sourceType.to_string()+numberResponding.to_string()+
                     numberResponding1.to_string()+
-                    ((queued==true)?numberResponding2.to_string():numberResponding3.to_string());
+                    ((queued>0)?numberResponding2.to_string():numberResponding3.to_string());
     boost::dynamic_bitset<> message(temp);
     PayloadPacket starter(destination,origin, transactionID, messageType, message);
     starter.write(serial);
 }
 
-void sendCommand(TimeoutSerial &serial, PayloadPacket &payload)
+void sendCommand(TimeoutSerial &serial, PayloadPacket &payload, Commands commandValue)
 {
     bitset<2*Command::BYTE> destination (0x0100); // Process number on pg:145 of document
     bitset<2*Command::BYTE> origin(0x0001);
@@ -143,8 +160,9 @@ void sendCommand(TimeoutSerial &serial, PayloadPacket &payload)
     bitset<4*Command::BYTE> originalMesgType(0x40000100);
     // Creating a rudder command
     bitset<1*Command::BYTE> ID (0x10);
-    bitset<2*Command::BYTE> value (0x0220);
-    bitset<5*Command::BYTE> message (0x0); //5
+    bitset<2*Command::BYTE> value (commandValue);
+    //bitset<5*Command::BYTE> message (0xFF000000+0x01000000); Holding Station Test
+    bitset<5*Command::BYTE> message (0x00);
     bitset<4*Command::BYTE> longitude (0x0); //4
     bitset<4*Command::BYTE> latitude (0x0); //4
     Command level1(ID,value,message,longitude,latitude);
@@ -170,8 +188,8 @@ void newWayPoint(TimeoutSerial &serial, PayloadPacket &payload)
     bitset<1*Command::BYTE> ID (0x10);
     bitset<2*Command::BYTE> value (0x0080);
     bitset<5*Command::BYTE> message (0x01); //5
-    bitset<4*Command::BYTE> longitude (36.80230094); //4
-    bitset<4*Command::BYTE> latitude (-121.7877388); //4
+    bitset<4*Command::BYTE> longitude (40.80230094); //4
+    bitset<4*Command::BYTE> latitude (-125.7877388); //4
     Command level1(ID,value,message,longitude,latitude);
     CommandPacket command(level1);
     // End of creating command

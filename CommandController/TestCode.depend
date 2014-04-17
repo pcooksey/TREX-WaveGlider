@@ -7198,3 +7198,84 @@
 	"TimeoutSerial.h"
 	"functions.h"
 
+1397181081 source:c:\users\pcooksey\documents\github\trex-waveglider\commandcontroller\commandpacket.cpp
+	"commandpacket.h"
+	"functions.h"
+
+1396570502 c:\users\pcooksey\documents\github\trex-waveglider\commandcontroller\commandpacket.h
+	<iostream>
+	<sstream>
+	<string>
+	<vector>
+	<bitset>
+	<boost/dynamic_bitset.hpp>
+	"stdint.h"
+
+1395958324 c:\users\pcooksey\documents\github\trex-waveglider\commandcontroller\functions.h
+	<string>
+	<vector>
+	<boost/dynamic_bitset.hpp>
+	"stdint.h"
+
+1397778117 source:c:\users\pcooksey\documents\github\trex-waveglider\commandcontroller\main.cpp
+	<iostream>
+	<vector>
+	<bitset>
+	<boost/dynamic_bitset.hpp>
+	<boost/asio.hpp>
+	"TimeoutSerial.h"
+	"payloadpacket.h"
+	"commandpacket.h"
+	"response.h"
+	"functions.h"
+
+1395251666 c:\users\pcooksey\documents\github\trex-waveglider\commandcontroller\timeoutserial.h
+	<stdexcept>
+	<boost/utility.hpp>
+	<boost/asio.hpp>
+
+1396287344 c:\users\pcooksey\documents\github\trex-waveglider\commandcontroller\payloadpacket.h
+	<bitset>
+	<boost/dynamic_bitset.hpp>
+	"stdint.h"
+	"TimeoutSerial.h"
+	"functions.h"
+
+1395180848 c:\users\pcooksey\documents\github\trex-waveglider\commandcontroller\response.h
+	<sstream>
+	<string>
+	<vector>
+	<bitset>
+	"stdint.h"
+	<boost/dynamic_bitset.hpp>
+	"TimeoutSerial.h"
+
+1397256270 source:c:\users\pcooksey\documents\github\trex-waveglider\commandcontroller\payloadpacket.cpp
+	"payloadpacket.h"
+
+1395188618 source:c:\users\pcooksey\documents\github\trex-waveglider\commandcontroller\response.cpp
+	"response.h"
+	"functions.h"
+
+1315480712 source:c:\users\pcooksey\documents\github\trex-waveglider\commandcontroller\serialstream.cpp
+	"serialstream.h"
+	<iostream>
+	<boost/asio.hpp>
+	<boost/bind.hpp>
+
+1315480712 c:\users\pcooksey\documents\github\trex-waveglider\commandcontroller\serialstream.h
+	<string>
+	<stdexcept>
+	<boost/system/error_code.hpp>
+	<boost/shared_ptr.hpp>
+	<boost/iostreams/stream.hpp>
+	<boost/iostreams/categories.hpp>
+	<boost/date_time/posix_time/posix_time_duration.hpp>
+
+1395963898 source:c:\users\pcooksey\documents\github\trex-waveglider\commandcontroller\timeoutserial.cpp
+	"TimeoutSerial.h"
+	<string>
+	<algorithm>
+	<iostream>
+	<boost/bind.hpp>
+

@@ -128,6 +128,43 @@ Message Type [2 byte]: 0x41 0x80
 Data [15 byte]: 0x01 0x00 0x00 0x00 0x10 0x00 0x00 0x00 0x00 0x23 0x00 0x20 0x05 0x00 0x14 0x00 0x05 0x00 0x00 0x14 0x00 0x00 0x14 0x03 0x00 0x00 0x00 0xff 0x73 0x46 0x14 0x00 0x00 0x3c 0x00 0x00 0x00 0x0f 0xf4 0xf0 0x50 0x01 0x64 0xff 0xa4 0xfb 0x2a 0x43 0x7e 0x17 0x00 0x00 0x00 0x00 0x00 0x6b 0x04 0x41 0x80 0x01 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00
 CRC [2 byte]: 0xb0 0x0e
 
+Packet Size: 0000000000111010
+Destination: 0001000000000000
+Origin: 0000000000000000
+Transaction ID: 0011000100000011
+MessageType: 0x4180
+Message: 0x10000001000000000230021400050000140000140300001461400003C0000000FDEF0501A4FB
+CRC(16): 1010110100001111
+----------- Unknown Message -----------
+----------- Starting -----------
+Packet Size: 0000000000010111
+Destination: 0000000000000000
+Origin: 0000000000000000
+Transaction ID: 0011001000000011
+MessageType: 0100000110000000
+Message: 0000000100000000000000000000000000000000000000000000000000000000000000000000000000000000
+CRC(16): 0010111111110011
+----------- Unknown Message -----------
+
+------------
+
+Request Status inner message
+Message: Binary: 001010110001010000010110000100010000010000001110100001011111000001010000000000010001101011111111101001001111101
+101011001
+Hex: 59
+
+Page 57 for Waypoint value description
+Time [6 bytes]: 0x2B141611040E
+	Latitute [4 bytes]: 0x85F05001 
+		Latitude = degrees*600000 + minutes*10000 + minute_fraction. [-90 < degrees ≤ 90]
+		[0 ≤ minutes < 60] [0 ≤ minute_fraction < 10000] If degrees < 0, location is in the Southern
+		hemisphere
+	Longitude [4 bytes]: 0x1AFFA4FB
+		Longitude = degrees*600000 + minutes*10000 + minute_fraction. -180 < degrees ≤ 180.
+		0 ≤ minutes < 60. 0 ≤ minute_fraction < 10000. If degrees < 0, location is in the Western
+		hemisphere
+	Fix Valid [1 byte]: 0x59
+
 ------------
 
  
